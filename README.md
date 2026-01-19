@@ -1,12 +1,10 @@
-# CourseLens
-
-📘 CourseLens
+## 📘 CourseLens
 
 An AI-powered course intelligence platform for smarter academic planning
 
 CourseLens helps university students make better course decisions by turning scattered academic data into clear, evidence-backed insights. Instead of guessing workload, difficulty, or prerequisites from outdated forums or PDFs, students can query CourseLens and get structured, explainable answers powered by agentic AI and retrieval-augmented generation.
 
-🚀 What Problem Does CourseLens Solve?
+# 🚀 What Problem Does CourseLens Solve?
 
 University course selection is surprisingly hard.
 
@@ -22,7 +20,7 @@ No visibility into how one course unlocks future options
 
 CourseLens was built to fix this. It centralizes fragmented academic information and uses AI to analyze, compare, and explain courses in a way that actually supports real planning decisions.
 
-🧠 What CourseLens Does
+# 🧠 What CourseLens Does
 
 CourseLens allows students to:
 
