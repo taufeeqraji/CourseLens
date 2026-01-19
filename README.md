@@ -1,10 +1,10 @@
-## 📘 CourseLens
+# 📘 CourseLens
 
 An AI-powered course intelligence platform for smarter academic planning
 
 CourseLens helps university students make better course decisions by turning scattered academic data into clear, evidence-backed insights. Instead of guessing workload, difficulty, or prerequisites from outdated forums or PDFs, students can query CourseLens and get structured, explainable answers powered by agentic AI and retrieval-augmented generation.
 
-# 🚀 What Problem Does CourseLens Solve?
+## 🚀 What Problem Does CourseLens Solve?
 
 University course selection is surprisingly hard.
 
@@ -20,7 +20,7 @@ No visibility into how one course unlocks future options
 
 CourseLens was built to fix this. It centralizes fragmented academic information and uses AI to analyze, compare, and explain courses in a way that actually supports real planning decisions.
 
-# 🧠 What CourseLens Does
+## 🧠 What CourseLens Does
 
 CourseLens allows students to:
 
@@ -36,7 +36,7 @@ Make planning decisions backed by retrieved evidence, not guesses
 
 All responses are grounded in retrieved sources like course catalogs, PDFs, and student reviews.
 
-🏗️ System Architecture (High Level)
+## 🏗️ System Architecture (High Level)
 
 CourseLens is built using a multi-agent architecture, where each agent handles a specific responsibility and collaborates to generate a final response.
 
@@ -54,7 +54,7 @@ Builds and reasons over a course dependency graph to understand progression path
 Synthesis Agent
 Combines retrieved evidence into a clear, student-friendly answer.
 
-🔍 Retrieval-Augmented Generation (RAG)
+##🔍 Retrieval-Augmented Generation (RAG)
 
 CourseLens uses a full RAG pipeline to ensure accuracy and explainability:
 
@@ -68,7 +68,7 @@ The LLM generates answers grounded only in retrieved context
 
 This prevents hallucinations and ensures responses can be traced back to real academic sources.
 
-🧰 Tech Stack
+## 🧰 Tech Stack
 Backend
 
 FastAPI – API layer and orchestration
@@ -97,7 +97,7 @@ Interactive web interface for querying and comparison
 
 Visual course dependency exploration
 
-🔄 Typical Workflow
+## 🔄 Typical Workflow
 
 User asks a question like:
 “Is CMPUT 301 manageable with CMPUT 366?”
@@ -116,7 +116,7 @@ The synthesis agent generates a grounded response
 
 The user receives a clear, evidence-based answer
 
-📊 Real-World Impact
+## 📊 Real-World Impact
 
 CourseLens reduces guesswork in academic planning by:
 
@@ -130,25 +130,24 @@ Making academic information accessible and explainable
 
 It turns fragmented academic data into actionable insight.
 
-🛠️ Setup (High Level)
+## 🛠️ Setup (High Level)
 # Clone the repository
-git clone https://github.com/your-username/CourseLens.git
-cd CourseLens
+`git clone https://github.com/your-username/CourseLens.git`
+`cd CourseLens`
 
 # Create virtual environment
-python -m venv venv
-source venv/bin/activate
+`python -m venv venv`
+`source venv/bin/activate`
 
 # Install dependencies
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 # Run backend
-uvicorn app.main:app --reload
-
+`uvicorn app.main:app --reload`
 
 (Exact setup may vary depending on vector DB and API keys.)
 
-📈 Future Enhancements
+## 📈 Future Enhancements
 
 Personalized recommendations based on degree program
 
