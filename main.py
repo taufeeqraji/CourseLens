@@ -9,9 +9,8 @@ import os
 from dotenv import load_dotenv
 from colorama import init, Fore
 
-from root_agent import RootAgent, CourseAgentWrapper
-from course_agent import CourseAgent
-from instructor_agent import InstructorAgent, InstructorAgentHandler
+from agent_factory import create_root_agent
+from root_agent import RootAgent
 
 
 # Initialize colorama
@@ -88,54 +87,24 @@ def main():
     """Main function"""
     load_dotenv()
 
-    gemini_key = os.getenv("GOOGLE_API_KEY")
-    firecrawl_key = os.getenv("FIRECRAWL_API_KEY")
-
-    if not gemini_key:
+    if not os.getenv("GOOGLE_API_KEY"):
         print(f"{Fore.RED}Error: GOOGLE_API_KEY not found in .env file")
         print(f"{Fore.YELLOW}Add GOOGLE_API_KEY=... to your .env\n")
+        return
+
+    if not os.getenv("FIRECRAWL_API_KEY"):
+        print(f"{Fore.RED}Error: FIRECRAWL_API_KEY not found in .env file")
+        print(f"{Fore.YELLOW}Add FIRECRAWL_API_KEY=... to your .env\n")
         return
 
     print_header()
     print(f"{Fore.CYAN}Initializing Multi-Agent System...")
 
     try:
-        # Root agent
-        root = RootAgent(gemini_key=gemini_key)
-
-        # Always initialize CourseAgent
-        print(f"{Fore.CYAN}Initializing CourseAgent...")
-        course_agent = CourseAgent(api_key=gemini_key)
-        course_agent_wrapper = CourseAgentWrapper(course_agent, root)
-
-        root.register_agent(
-            agent_name="CourseAgent",
-            agent_instance=course_agent_wrapper,
-            description="Answers course questions, prerequisites, difficulty, and summaries using live web data."
-        )
-
-        # Initialize InstructorAgent only if Firecrawl key exists
-        if firecrawl_key:
-            print(f"{Fore.CYAN}Initializing InstructorAgent...")
-            instructor_agent = InstructorAgent(
-                gemini_api_key=gemini_key,
-                firecrawl_api_key=firecrawl_key
-            )
-
-            instructor_agent_handler = InstructorAgentHandler(instructor_agent, root)
-
-            root.register_agent(
-                agent_name="InstructorAgent",
-                agent_instance=instructor_agent_handler,
-                description="Provides live information about professors from RateMyProfessors using Firecrawl."
-            )
-
-            print(f"{Fore.GREEN}✓ System initialized successfully!\n")
-            print(f"{Fore.YELLOW}📊 Active Agents: CourseAgent, InstructorAgent (LIVE data)\n")
-        else:
-            print(f"{Fore.GREEN}✓ System initialized with CourseAgent only\n")
-            print(f"{Fore.YELLOW}📊 Active Agents: CourseAgent\n")
-            print(f"{Fore.YELLOW}💡 Add FIRECRAWL_API_KEY to .env to enable InstructorAgent\n")
+        root = create_root_agent()
+        active_agents = ", ".join(root.sub_agents.keys())
+        print(f"{Fore.GREEN}✓ System initialized successfully!\n")
+        print(f"{Fore.YELLOW}📊 Active Agents: {active_agents}\n")
 
     except Exception as e:
         print(f"{Fore.RED}✗ Error initializing system: {e}")

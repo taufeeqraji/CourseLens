@@ -5,3 +5,5 @@ beautifulsoup4==4.12.3
 lxml==5.1.0
 colorama==0.4.6
 firecrawl-py
+fastapi==0.115.6
+uvicorn[standard]==0.34.0

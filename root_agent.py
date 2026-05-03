@@ -237,13 +237,22 @@ Return ONLY the JSON, no other text."""
     
     def execute(self, user_query: str) -> str:
         """
+        Execute a user query by routing to appropriate agent.
+
+        This CLI-compatible method returns only the final response text. Web
+        callers should use execute_detailed() when they need routing metadata.
+        """
+        return self.execute_detailed(user_query)["response"]
+
+    def execute_detailed(self, user_query: str) -> Dict:
+        """
         Execute a user query by routing to appropriate agent
         
         Args:
             user_query: User's question
             
         Returns:
-            Final response to user
+            Response and routing metadata
         """
         print(f"\n🤔 Analyzing query: '{user_query}'")
         
@@ -290,7 +299,13 @@ Return ONLY the JSON, no other text."""
             "content": response
         })
         
-        return response
+        return {
+            "response": response,
+            "agent": agent_name if agent_name in self.sub_agents else None,
+            "reasoning": decision.get("reasoning"),
+            "parameters": decision.get("parameters", {}),
+            "last_action": self.current_context.get("last_action"),
+        }
     
     def get_stats(self) -> Dict:
         """Get statistics about agent usage"""

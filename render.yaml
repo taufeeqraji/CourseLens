@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: course-insight-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: LOG_LEVEL
+        value: INFO
+      - key: SESSION_TTL_MINUTES
+        value: "120"
+      - key: MAX_SESSIONS
+        value: "50"
+      - key: FRONTEND_ORIGINS
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: FIRECRAWL_API_KEY
+        sync: false
